@@ -1,7 +1,8 @@
 ## Use Case Diagram
 ![제목 없는 다이어그램 drawio](https://github.com/gaeun7/scheduleProject/assets/162283154/1d7be0ca-8e75-49f3-9104-d586296bfc6f)
 
-![API 명세서](https://documenter.getpostman.com/view/34878494/2sA3JRZz5n#4d3f9a5f-8bd1-4fb7-9cf6-f09571873924)
+## API 명세서
+![명세서](https://documenter.getpostman.com/view/34878494/2sA3JRZz5n#4d3f9a5f-8bd1-4fb7-9cf6-f09571873924)
 
 ## Creat -> Post : 1단계 요구사항
 1. `할일 제목`, `할일 내용`, `담당자`, `비밀번호`, `작성일`을 저장할 수 있습니다.
