@@ -29,7 +29,12 @@ public class ScheduleController {
     public ScheduleDTO updateSchedule(@PathVariable Long id, @RequestBody UpdateScheduleRequest request) {
         return scheduleService.updateSchedule(id, request.getTitle(), request.getContent(), request.getManager(), request.getPassword());
     }
+    @DeleteMapping("/{id}")
+    public void deleteSchedule(@PathVariable Long id, @RequestBody DeleteScheduleRequest request) {
+        scheduleService.deleteSchedule(id, request.getPassword());
+    }
 }
+
 class CreateScheduleRequest {
     private String title;
     private String content;
@@ -98,6 +103,18 @@ class UpdateScheduleRequest {
     public void setManager(String manager) {
         this.manager = manager;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+}
+
+class DeleteScheduleRequest {
+    private String password;
 
     public String getPassword() {
         return password;
