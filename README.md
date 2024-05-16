@@ -22,4 +22,6 @@ Update -> Put : 4단계 요구사항
 Delete -> Delete : 5단계 요구사항
 5. 선택한 일정을 삭제할 수 있습니다.
 - 서버에 일정 삭제를 요청할 때 `비밀번호`를 함께 전달합니다.
-  
+![image](https://github.com/gaeun7/scheduleProject/assets/162283154/fc0f75b2-28c2-437a-a46e-a1a1c7296557)
+![image](https://github.com/gaeun7/scheduleProject/assets/162283154/f3e9cc79-13a9-4a84-9920-4efe9926c58a)
+
