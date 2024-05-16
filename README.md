@@ -1,6 +1,5 @@
 ## Use Case Diagram
-![Uploading 일정관리UseCaseDiagram.drawio.svg…]()
-
+![제목 없는 다이어그램 drawio](https://github.com/gaeun7/scheduleProject/assets/162283154/1d7be0ca-8e75-49f3-9104-d586296bfc6f)
 
 ![API 명세서](https://documenter.getpostman.com/view/34878494/2sA3JRZz5n#4d3f9a5f-8bd1-4fb7-9cf6-f09571873924)
 
