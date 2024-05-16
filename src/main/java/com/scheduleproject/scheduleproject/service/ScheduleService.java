@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
+import com.scheduleproject.scheduleproject.exception.ResourceNotFoundException;
+
 
 @Service
 public class ScheduleService {
@@ -28,5 +31,12 @@ public class ScheduleService {
         dto.setManager(schedule.getManager());
         dto.setCreatedAt(schedule.getCreatedAt());
         return dto;
+    }
+
+    public ScheduleDTO getSchedule(Long id) {
+        Optional<Schedule> scheduleOptional = scheduleRepository.findById(id);
+        if (scheduleOptional.isPresent()) {
+            return convertToDTO(scheduleOptional.get());
+        } else throw new ResourceNotFoundException("Schedule not found with id " + id);
     }
 }
