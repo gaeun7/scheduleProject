@@ -16,6 +16,7 @@ https://documenter.getpostman.com/view/34878494/2sA3JRZz5n
 
 ## Read -> Get : 2단계 요구사항
 2. 선택한 일정의 정보를 조회할 수 있습니다.
+   
 ![스크린샷 2024-05-16 141154](https://github.com/gaeun7/scheduleProject/assets/162283154/513a44e5-b124-48c0-9fab-ab879b688c39)
 
 ## Read -> Get : 3단계 요구사항
