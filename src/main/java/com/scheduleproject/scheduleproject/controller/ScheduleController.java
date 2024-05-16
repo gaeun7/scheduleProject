@@ -25,8 +25,51 @@ public class ScheduleController {
     public List<ScheduleDTO> getAllSchedules() {
         return scheduleService.getAllSchedules();
     }
+    @PutMapping("/{id}")
+    public ScheduleDTO updateSchedule(@PathVariable Long id, @RequestBody UpdateScheduleRequest request) {
+        return scheduleService.updateSchedule(id, request.getTitle(), request.getContent(), request.getManager(), request.getPassword());
+    }
 }
 class CreateScheduleRequest {
+    private String title;
+    private String content;
+    private String manager;
+    private String password;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getManager() {
+        return manager;
+    }
+
+    public void setManager(String manager) {
+        this.manager = manager;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+}
+
+class UpdateScheduleRequest {
     private String title;
     private String content;
     private String manager;
