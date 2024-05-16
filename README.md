@@ -5,6 +5,10 @@
 ## API 명세서
 https://documenter.getpostman.com/view/34878494/2sA3JRZz5n
 
+## ERD
+![ER Diagram for Online Book Store](https://github.com/gaeun7/scheduleProject/assets/162283154/370a2448-dc64-4e4a-ae57-7cfe6b177b79)
+
+
 ## Creat -> Post : 1단계 요구사항
 1. `할일 제목`, `할일 내용`, `담당자`, `비밀번호`, `작성일`을 저장할 수 있습니다.
 - 저장된 일정 정보를 반환 받아 확인할 수 있습니다.
@@ -17,7 +21,7 @@ https://documenter.getpostman.com/view/34878494/2sA3JRZz5n
 ## Read -> Get : 3단계 요구사항
 3. 등록된 일정 전체를 조회할 수 있습니다.
 - 조회된 일정 목록은 `작성일` 기준 내림차순으로 정렬 되어있습니다.
-- ![스크린샷 2024-05-16 142817](https://github.com/gaeun7/scheduleProject/assets/162283154/cb58304a-3cce-4e13-ad5a-5ff5b677a68d)
+![스크린샷 2024-05-16 142817](https://github.com/gaeun7/scheduleProject/assets/162283154/cb58304a-3cce-4e13-ad5a-5ff5b677a68d)
 
 ## Update -> Put : 4단계 요구사항
 4. 선택한 일정의 `할일 제목`, `할일 내용`, `담당자`을 수정할 수 있습니다.
