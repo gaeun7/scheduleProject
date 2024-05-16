@@ -1,3 +1,4 @@
+<center>
 ## Use Case Diagram
 ![제목 없는 다이어그램 drawio](https://github.com/gaeun7/scheduleProject/assets/162283154/1d7be0ca-8e75-49f3-9104-d586296bfc6f)
 
@@ -30,4 +31,5 @@ https://documenter.getpostman.com/view/34878494/2sA3JRZz5n
 - 서버에 일정 삭제를 요청할 때 `비밀번호`를 함께 전달합니다.
 ![image](https://github.com/gaeun7/scheduleProject/assets/162283154/fc0f75b2-28c2-437a-a46e-a1a1c7296557)
 ![image](https://github.com/gaeun7/scheduleProject/assets/162283154/f3e9cc79-13a9-4a84-9920-4efe9926c58a)
+</center>
 
