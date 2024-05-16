@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 import com.scheduleproject.scheduleproject.exception.ResourceNotFoundException;
 
 
@@ -38,5 +41,12 @@ public class ScheduleService {
         if (scheduleOptional.isPresent()) {
             return convertToDTO(scheduleOptional.get());
         } else throw new ResourceNotFoundException("Schedule not found with id " + id);
+    }
+
+    public List<ScheduleDTO> getAllSchedules() {
+        List<Schedule> schedules = scheduleRepository.findAllByOrderByCreatedAtDesc();
+        return schedules.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
     }
 }

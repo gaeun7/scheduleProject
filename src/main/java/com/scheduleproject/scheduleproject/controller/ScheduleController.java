@@ -5,6 +5,8 @@ import com.scheduleproject.scheduleproject.service.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/schedules")
 public class ScheduleController {
@@ -18,6 +20,10 @@ public class ScheduleController {
     @GetMapping("/{id}")
     public ScheduleDTO getSchedule(@PathVariable Long id) {
         return scheduleService.getSchedule(id);
+    }
+    @GetMapping
+    public List<ScheduleDTO> getAllSchedules() {
+        return scheduleService.getAllSchedules();
     }
 }
 class CreateScheduleRequest {

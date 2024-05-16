@@ -2,7 +2,6 @@ package com.scheduleproject.scheduleproject;
 
 import com.scheduleproject.scheduleproject.dto.ScheduleDTO;
 import com.scheduleproject.scheduleproject.entity.Schedule;
-import com.scheduleproject.scheduleproject.exception.ResourceNotFoundException;
 import com.scheduleproject.scheduleproject.repository.ScheduleRepository;
 import com.scheduleproject.scheduleproject.service.ScheduleService;
 import org.junit.jupiter.api.Test;
@@ -12,10 +11,10 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -28,31 +27,25 @@ public class ScheduleServiceTest {
     private ScheduleService scheduleService;
 
     @Test
-    public void testGetSchedule_Exists() {
+    public void testGetAllSchedules() {
         // Mock 데이터 설정
-        Long id = 1L;
-        Schedule schedule = new Schedule("Test Title", "Test Content", "Test Manager", "Test Password", LocalDateTime.now());
-        schedule.setId(id);
-        when(scheduleRepository.findById(id)).thenReturn(Optional.of(schedule));
+        List<Schedule> mockSchedules = new ArrayList<>();
+        for (int i = 1; i <= 5; i++) {
+            Schedule schedule = new Schedule("Title " + i, "Content " + i, "Manager " + i, "Password " + i, LocalDateTime.now());
+            schedule.setId((long) i);
+            mockSchedules.add(schedule);
+        }
+        when(scheduleRepository.findAllByOrderByCreatedAtDesc()).thenReturn(mockSchedules);
 
         // 테스트 수행
-        ScheduleDTO result = scheduleService.getSchedule(id);
+        List<ScheduleDTO> result = scheduleService.getAllSchedules();
 
         // 결과 확인
-        assertEquals(schedule.getTitle(), result.getTitle());
-        assertEquals(schedule.getContent(), result.getContent());
-        assertEquals(schedule.getManager(), result.getManager());
-    }
-
-    @Test
-    public void testGetSchedule_NotExists() {
-        // Mock 데이터 설정 - 일정이 존재하지 않는 경우
-        Long id = 1L;
-        when(scheduleRepository.findById(id)).thenReturn(Optional.empty());
-
-        // 예외 확인
-        assertThrows(ResourceNotFoundException.class, () -> {
-            scheduleService.getSchedule(id);
-        });
+        assertEquals(mockSchedules.size(), result.size());
+        for (int i = 0; i < mockSchedules.size(); i++) {
+            assertEquals(mockSchedules.get(i).getTitle(), result.get(i).getTitle());
+            assertEquals(mockSchedules.get(i).getContent(), result.get(i).getContent());
+            assertEquals(mockSchedules.get(i).getManager(), result.get(i).getManager());
+        }
     }
 }
