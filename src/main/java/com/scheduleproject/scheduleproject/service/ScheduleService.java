@@ -2,6 +2,7 @@ package com.scheduleproject.scheduleproject.service;
 
 import com.scheduleproject.scheduleproject.dto.ScheduleDTO;
 import com.scheduleproject.scheduleproject.entity.Schedule;
+import com.scheduleproject.scheduleproject.exception.AlreadyDeletedException;
 import com.scheduleproject.scheduleproject.exception.UnauthorizedException;
 import com.scheduleproject.scheduleproject.repository.ScheduleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.scheduleproject.scheduleproject.exception.ResourceNotFoundException;
-
 
 @Service
 public class ScheduleService {
@@ -41,8 +41,14 @@ public class ScheduleService {
     public ScheduleDTO getSchedule(Long id) {
         Optional<Schedule> scheduleOptional = scheduleRepository.findById(id);
         if (scheduleOptional.isPresent()) {
-            return convertToDTO(scheduleOptional.get());
-        } else throw new ResourceNotFoundException("일정을 찾을 수 없음  " + id);
+            Schedule schedule = scheduleOptional.get();
+            if (schedule.isDeleted()) {
+                throw new AlreadyDeletedException("일정이 이미 삭제되었습니다.");
+            }
+            return convertToDTO(schedule);
+        } else {
+            throw new ResourceNotFoundException("일정을 찾을 수 없음 " + id);
+        }
     }
 
     public List<ScheduleDTO> getAllSchedules() {
@@ -58,6 +64,9 @@ public class ScheduleService {
         if (!schedule.getPassword().equals(password)) {
             throw new UnauthorizedException("비밀번호가 틀림");
         }
+        if (schedule.isDeleted()) {
+            throw new AlreadyDeletedException("일정이 이미 삭제되었습니다.");
+        }
         schedule.setTitle(title);
         schedule.setContent(content);
         schedule.setManager(manager);
@@ -71,6 +80,10 @@ public class ScheduleService {
         if (!schedule.getPassword().equals(password)) {
             throw new UnauthorizedException("비밀번호 틀림");
         }
-        scheduleRepository.delete(schedule);
+        if (schedule.isDeleted()) {
+            throw new AlreadyDeletedException("일정이 이미 삭제되었습니다.");
+        }
+        schedule.setDeleted(true);
+        scheduleRepository.save(schedule);
     }
 }

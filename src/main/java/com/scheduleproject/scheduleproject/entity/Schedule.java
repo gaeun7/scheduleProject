@@ -24,6 +24,7 @@ public class Schedule {
     private String manager;
     private String password;
     private LocalDateTime createdAt;
+    private boolean deleted = false;
 
     public Schedule(String title, String content, String manager, String password, LocalDateTime createdAt) {
         this.title = title;

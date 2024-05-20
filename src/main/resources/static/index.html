@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>일정 관리 앱</title>
+</head>
+<body>
+<h1>일정 관리 앱</h1>
+<form id="scheduleForm">
+    <label for="title">할일 제목:</label>
+    <input type="text" id="title" name="title" required><br><br>
+
+    <label for="content">할일 내용:</label><br>
+    <textarea id="content" name="content" required></textarea><br><br>
+
+    <label for="manager">담당자:</label>
+    <input type="text" id="manager" name="manager" required><br><br>
+
+    <label for="password">비밀번호:</label>
+    <input type="password" id="password" name="password" required><br><br>
+
+    <button type="submit">일정 작성</button>
+</form>
+
+<script>
+    document.getElementById('scheduleForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const formData = new FormData(this);
+        const scheduleData = {};
+        formData.forEach((value, key) => {
+            scheduleData[key] = value;
+        });
+
+        // 서버로 일정 작성 요청 보내는 부분
+        fetch('http://localhost:8080/api/schedules', { // 서버 주소를 올바르게 수정하세요.
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(scheduleData)
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to create schedule');
+                }
+                return response.json();
+            })
+            .then(data => {
+                alert('일정이 성공적으로 작성되었습니다.');
+                // 성공 시 필요한 추가 동작 수행
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('일정 작성에 실패했습니다.');
+            });
+    });
+</script>
+</body>
+</html>
