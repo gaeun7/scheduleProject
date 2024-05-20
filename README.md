@@ -6,7 +6,8 @@
 [https://documenter.getpostman.com/view/34878494/2sA3JRZz5n](https://documenter.getpostman.com/view/34878494/2sA3JT1xhj)
 
 ## ERD
-![ER Diagram for Online Book Store](https://github.com/gaeun7/scheduleProject/assets/162283154/370a2448-dc64-4e4a-ae57-7cfe6b177b79)
+![scheduleprojectERD](https://github.com/gaeun7/scheduleProject/assets/162283154/2490c18e-1f3c-4e11-b475-2f0af1f0425c)
+
 
 
 ## Creat -> Post : 1단계 요구사항
