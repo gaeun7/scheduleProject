@@ -3,7 +3,7 @@
 ![제목 없는 다이어그램 drawio](https://github.com/gaeun7/scheduleProject/assets/162283154/1d7be0ca-8e75-49f3-9104-d586296bfc6f)
 
 ## API 명세서
-https://documenter.getpostman.com/view/34878494/2sA3JRZz5n
+[https://documenter.getpostman.com/view/34878494/2sA3JRZz5n](https://documenter.getpostman.com/view/34878494/2sA3JT1xhj)
 
 ## ERD
 ![ER Diagram for Online Book Store](https://github.com/gaeun7/scheduleProject/assets/162283154/370a2448-dc64-4e4a-ae57-7cfe6b177b79)
