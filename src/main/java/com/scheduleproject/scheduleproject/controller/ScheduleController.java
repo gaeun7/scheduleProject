@@ -1,9 +1,6 @@
 package com.scheduleproject.scheduleproject.controller;
 
-import com.scheduleproject.scheduleproject.dto.CreateScheduleRequest;
-import com.scheduleproject.scheduleproject.dto.DeleteScheduleRequest;
-import com.scheduleproject.scheduleproject.dto.ScheduleDTO;
-import com.scheduleproject.scheduleproject.dto.UpdateScheduleRequest;
+import com.scheduleproject.scheduleproject.dto.*;
 import com.scheduleproject.scheduleproject.exception.AlreadyDeletedException;
 import com.scheduleproject.scheduleproject.exception.ResourceNotFoundException;
 import com.scheduleproject.scheduleproject.exception.UnauthorizedException;
@@ -22,7 +19,7 @@ public class ScheduleController {
 
     @PostMapping
     public ScheduleDTO createSchedule(@RequestBody CreateScheduleRequest request){
-        return scheduleService.createSchedule(request.getTitle(), request.getContent(), request.getManager(), request.getPassword());
+        return scheduleService.createSchedule(request);
     }
 
     @GetMapping("/{id}")
@@ -37,12 +34,12 @@ public class ScheduleController {
 
     @PutMapping("/{id}")
     public ScheduleDTO updateSchedule(@PathVariable Long id, @RequestBody UpdateScheduleRequest request) {
-        return scheduleService.updateSchedule(id, request.getTitle(), request.getContent(), request.getManager(), request.getPassword());
+        return scheduleService.updateSchedule(id, request);
     }
 
     @DeleteMapping("/{id}")
     public void deleteSchedule(@PathVariable Long id, @RequestBody DeleteScheduleRequest request) {
-        scheduleService.deleteSchedule(id, request.getPassword());
+        scheduleService.deleteSchedule(id, request);
     }
 
     @ExceptionHandler(UnauthorizedException.class)
