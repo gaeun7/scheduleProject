@@ -151,6 +151,23 @@ public class ScheduleService {
         return convertToDTO(updatedComment);
     }
 
+    @Transactional
+    public void deleteComment(Long scheduleId, Long commentId, String userId) {
+        Comment comment = commentRepository.findById(commentId)
+                .orElseThrow(() -> new ResourceNotFoundException("댓글을 찾을 수 없음 " + commentId));
+
+        if (!comment.getSchedule().getId().equals(scheduleId)) {
+            throw new ResourceNotFoundException("일정과 댓글의 연관관계가 맞지 않음");
+        }
+
+        if (!comment.getUserId().equals(userId)) {
+            throw new UnauthorizedException("댓글 작성자가 아님");
+        }
+
+        commentRepository.delete(comment);
+    }
+
+
     private ScheduleDTO convertToDTO(Schedule schedule) {
         ScheduleDTO dto = new ScheduleDTO();
         dto.setId(schedule.getId());

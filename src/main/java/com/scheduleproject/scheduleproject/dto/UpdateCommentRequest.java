@@ -9,5 +9,5 @@ public class UpdateCommentRequest {
     private Long commentId;
     private Long scheduleId;
     private String content;
-    private String userId; // This should be the ID of the user making the request
+    private String userId;
 }

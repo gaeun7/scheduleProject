@@ -56,6 +56,12 @@ public class ScheduleController {
         return scheduleService.updateComment(request);
     }
 
+    @DeleteMapping("/{id}/comments/{commentId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteComment(@PathVariable Long id, @PathVariable Long commentId, @RequestParam String userId) {
+        scheduleService.deleteComment(id, commentId, userId);
+    }
+
     @ExceptionHandler(UnauthorizedException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public String handleUnauthorizedException(UnauthorizedException ex) {
