@@ -1,49 +1,57 @@
 package com.scheduleproject.scheduleproject.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Getter
-@Setter
 @NoArgsConstructor
-public class Schedule {
+public class Schedule extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String title;
+    @Column(length = 100)
+    @Email
+    private String username;
 
-    @Column(nullable = false)
-    private String content;
-
-    @Column(nullable = false)
-    private String manager;
-
-    @Column(nullable = false)
+    @Column(length = 100, nullable = false)
+    @NotBlank
     private String password;
 
-    @Column(nullable = false)
-    private LocalDateTime createdAt;
+    @Column
+    @Length(max = 200)
+    @NotBlank
+    private String title;
 
-    @Column(nullable = false)
-    private boolean deleted = false;
+    @Column
+    private String description;
 
-    @OneToMany(mappedBy = "schedule", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Comment> comments = new ArrayList<>();
+    // 외래키로 인해서 일정 삭제 시 관련 exception이 발생하므로 orphanRemoval을 사용
+    @OneToMany(mappedBy = "schedule", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Comment> comments;
 
-    public Schedule(String title, String content, String manager, String password, LocalDateTime createdAt) {
+    public Schedule(String title, String description, String username, String password) {
         this.title = title;
-        this.content = content;
-        this.manager = manager;
+        this.description = description;
+        this.username = username;
         this.password = password;
-        this.createdAt = createdAt;
+    }
+
+    public void update(String title, String description) {
+        if (title != null && !title.isBlank()) {
+            this.title = title;
+        }
+
+        if (description != null && !description.isBlank()) {
+            this.description = description;
+        }
     }
 }

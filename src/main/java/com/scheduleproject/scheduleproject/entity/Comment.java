@@ -1,38 +1,38 @@
 package com.scheduleproject.scheduleproject.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Getter
-@Setter
 @NoArgsConstructor
-public class Comment {
+public class Comment extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String content;
+    @NotBlank(message = "공백이거나 null인 것은 불가합니다.")
+    private String comment;
 
-    @Column(nullable = false)
-    private String userId;
+    @Column(length = 100)
+    @Email
+    private String username;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "schedule_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "schedule_id")
     private Schedule schedule;
 
-    @Column(nullable = false)
-    private LocalDateTime createdAt;
-
-    public Comment(String content, String userId, Schedule schedule, LocalDateTime createdAt) {
-        this.content = content;
-        this.userId = userId;
+    public Comment(String comment, String username, Schedule schedule) {
+        this.comment = comment;
+        this.username = username;
         this.schedule = schedule;
-        this.createdAt = createdAt;
+    }
+
+    public void update(String comment) {
+        this.comment = comment;
     }
 }

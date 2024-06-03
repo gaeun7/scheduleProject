@@ -1,6 +1,6 @@
 package com.scheduleproject.scheduleproject;
 
-import com.scheduleproject.scheduleproject.dto.ScheduleDTO;
+import com.scheduleproject.scheduleproject.dto.ScheduleResponse;
 import com.scheduleproject.scheduleproject.entity.Schedule;
 import com.scheduleproject.scheduleproject.repository.ScheduleRepository;
 import com.scheduleproject.scheduleproject.service.ScheduleService;
@@ -38,7 +38,7 @@ public class ScheduleServiceTest {
         when(scheduleRepository.findAllByOrderByCreatedAtDesc()).thenReturn(mockSchedules);
 
         // 테스트 수행
-        List<ScheduleDTO> result = scheduleService.getAllSchedules();
+        List<ScheduleResponse> result = scheduleService.getAllSchedules();
 
         // 결과 확인
         assertEquals(mockSchedules.size(), result.size());
